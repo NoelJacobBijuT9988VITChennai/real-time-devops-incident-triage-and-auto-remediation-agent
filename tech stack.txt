@@ -1,0 +1,25 @@
+| Layer                    | Technology                       | Purpose                                                   |
+| ------------------------ | -------------------------------- | --------------------------------------------------------- |
+| Programming Language     | Python 3.11.9                    | Core application development                              |
+| API Framework            | FastAPI                          | REST API development and Swagger documentation            |
+| API Server               | Uvicorn                          | Runs FastAPI application                                  |
+| LLM Platform             | Groq                             | AI-powered reasoning and analysis                         |
+| LLM Model                | openai/gpt-oss-20b               | Incident triage, RCA explanation, remediation suggestions |
+| Dataset                  | processed\_events\_analysis.csv  | AIOps event and observability data                        |
+| Data Processing          | Pandas                           | CSV loading, filtering, preprocessing                     |
+| Numerical Analysis       | NumPy                            | Statistical and numerical operations                      |
+| Environment Management   | python-dotenv                    | Secure management of API keys and configuration           |
+| Workflow Engine          | Custom Multi-Agent Architecture  | Coordinates incident analysis workflow                    |
+| Log Analysis             | Log Agent                        | Analyzes error messages and log events                    |
+| Metrics Analysis         | Metrics Agent                    | Detects latency and service anomalies                     |
+| RCA Engine               | Hybrid Rule-Based RCA            | Identifies root causes from events                        |
+| Knowledge Base           | Synthetic Runbooks               | Stores troubleshooting and remediation procedures         |
+| RAG (Current)            | Rule-Based Retrieval             | Retrieves runbooks using root-cause mapping               |
+| RAG (Future)             | ChromaDB + Sentence Transformers | Semantic runbook retrieval                                |
+| Vector Database (Future) | ChromaDB                         | Stores runbook embeddings                                 |
+| Embedding Model (Future) | all-MiniLM-L6-v2                 | Generates semantic embeddings                             |
+| Container Orchestration  | Kubernetes                       | Deployment and auto-remediation operations                |
+| Kubernetes SDK           | Kubernetes Python Client         | Automates restart, scaling, and recovery actions          |
+| Configuration File       | .env                             | Stores API keys and environment variables                 |
+| Testing Interface        | Swagger UI                       | API testing and validation                                |
+| Development Environment  | Virtual Environment (venv)       | Dependency isolation                                      |

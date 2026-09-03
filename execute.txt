@@ -1,0 +1,11 @@
+.\venv\Scripts\Activate.ps1
+
+python test_embedding.py
+
+python rag/load_runbooks.py
+
+python test_workflow.py
+
+uvicorn app.main:app --reload
+
+http://127.0.0.1:8000/docs

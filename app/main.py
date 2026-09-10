@@ -1,30 +1,62 @@
-"""
-Main FastAPI application.
-"""
-
 from fastapi import FastAPI
 
-from workflows.incident_graph import (
-    run_workflow
-)
+from kubernetes import config
+
+from workflows.incident_graph import run_workflow
+
+from schemas.incident import IncidentRequest
 
 app = FastAPI(
-    title="Agentic SRE Copilot"
+    title="Agentic SRE Copilot",
+    description="AI-Powered Incident Management and Auto-Remediation Platform",
+    version="1.0.0"
 )
+
+
+def get_kubernetes_status():
+
+    try:
+
+        config.load_kube_config()
+
+        return "Connected"
+
+    except Exception:
+
+        return "Simulation Mode"
 
 
 @app.get("/")
-async def home():
+def home():
 
     return {
-        "message":
-        "Agentic SRE Copilot is running"
+        "project": "Agentic SRE Copilot",
+        "swagger_ui": "/docs",
+        "health": "/health"
     }
 
 
-@app.post("/incident")
-async def process_incident(event: dict):
+@app.get("/health")
+def health():
 
-    result = run_workflow(event)
+    return {
+        "status": "Healthy"
+    }
 
-    return result
+
+@app.get("/kubernetes-status")
+def kubernetes_status():
+
+    return {
+        "status": get_kubernetes_status()
+    }
+
+
+@app.post("/analyze-incident")
+def analyze_incident(
+    event: IncidentRequest
+):
+
+    return run_workflow(
+        event.model_dump()
+    )

@@ -1,11 +1,16 @@
-from sentence_transformers import (
-    SentenceTransformer
-)
+from sentence_transformers import SentenceTransformer
+
+MODEL_PATH = "models/all-MiniLM-L6-v2"
 
 model = SentenceTransformer(
-    "models/all-MiniLM-L6-v2"
+    MODEL_PATH,
+    local_files_only=True
+)
+
+embedding = model.encode(
+    "Database connectivity problem"
 )
 
 print(
-    "Model Loaded Successfully"
+    f"Embedding Dimension: {len(embedding)}"
 )

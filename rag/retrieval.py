@@ -1,24 +1,18 @@
-"""
-Semantic runbook retrieval.
-"""
-
-from langchain_community.vectorstores import (
-    Chroma
-)
+from langchain_community.vectorstores import Chroma
 
 from langchain_community.embeddings import (
-    SentenceTransformerEmbeddings
+    HuggingFaceEmbeddings
 )
 
-from config import (
-    EMBEDDING_MODEL_PATH,
-    VECTOR_DB_PATH
-)
+MODEL_PATH = "models/all-MiniLM-L6-v2"
 
-embedding_model = (
-    SentenceTransformerEmbeddings(
-        model_name=EMBEDDING_MODEL_PATH
-    )
+VECTOR_DB_PATH = "vector_db"
+
+embedding_model = HuggingFaceEmbeddings(
+    model_name=MODEL_PATH,
+    model_kwargs={
+        "local_files_only": True
+    }
 )
 
 db = Chroma(
@@ -35,6 +29,7 @@ def retrieve_runbook(query):
     )
 
     if docs:
+
         return docs[0].page_content
 
     return "No runbook found."

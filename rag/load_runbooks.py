@@ -1,37 +1,29 @@
-"""
-Load runbooks into ChromaDB.
-"""
-
 import os
 
 from langchain.schema import Document
 
 from langchain_community.vectorstores import Chroma
-
 from langchain_community.embeddings import (
-    SentenceTransformerEmbeddings
+    HuggingFaceEmbeddings
 )
 
-from config import (
-    EMBEDDING_MODEL_PATH,
-    VECTOR_DB_PATH
-)
+MODEL_PATH = "models/all-MiniLM-L6-v2"
+
+VECTOR_DB_PATH = "vector_db"
+
+RUNBOOK_FOLDER = "datasets/runbooks"
 
 documents = []
 
-runbook_folder = "datasets/runbooks"
-
-for file in os.listdir(runbook_folder):
+for file in os.listdir(RUNBOOK_FOLDER):
 
     if file.endswith(".md"):
 
-        path = os.path.join(
-            runbook_folder,
-            file
-        )
-
         with open(
-            path,
+            os.path.join(
+                RUNBOOK_FOLDER,
+                file
+            ),
             "r",
             encoding="utf-8"
         ) as f:
@@ -47,10 +39,11 @@ for file in os.listdir(runbook_folder):
             )
         )
 
-embedding_model = (
-    SentenceTransformerEmbeddings(
-        model_name=EMBEDDING_MODEL_PATH
-    )
+embedding_model = HuggingFaceEmbeddings(
+    model_name=MODEL_PATH,
+    model_kwargs={
+        "local_files_only": True
+    }
 )
 
 db = Chroma.from_documents(
@@ -62,5 +55,5 @@ db = Chroma.from_documents(
 db.persist()
 
 print(
-    "Vector database created successfully."
+    "Runbooks loaded successfully."
 )

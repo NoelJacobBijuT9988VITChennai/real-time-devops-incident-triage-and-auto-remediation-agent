@@ -1,11 +1,22 @@
+# Activate virtual environment
 .\venv\Scripts\Activate.ps1
 
+# Verify embedding model
 python test_embedding.py
 
+# Load runbooks into ChromaDB
 python rag/load_runbooks.py
 
+# Test RAG retrieval (recommended)
+python test_rag.py
+
+# Verify Kubernetes connectivity (recommended)
+python test_kubernetes.py
+
+# Test complete workflow
 python test_workflow.py
 
+# Start FastAPI application
 uvicorn app.main:app --reload
 
 http://127.0.0.1:8000/docs

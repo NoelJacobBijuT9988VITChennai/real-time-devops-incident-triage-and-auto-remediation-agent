@@ -1,42 +1,33 @@
 """
-LLM-based Remediation Planner
+Remediation Agent
+
+Generate recovery actions
+based on RCA results.
 """
 
-import os
 
-from groq import Groq
-from dotenv import load_dotenv
+def create_plan(
+    root_cause,
+    runbook
+):
 
-load_dotenv()
+    if "Database" in root_cause:
 
-client = Groq(
-    api_key=os.getenv("GROQ_API_KEY")
-)
+        return {
+            "action": "restart_deployment",
+            "target": "database-service"
+        }
 
-def create_plan(root_cause, runbook):
+    elif "Latency" in root_cause:
 
-    prompt = f"""
-    Root Cause:
-    {root_cause}
+        return {
+            "action": "scale_deployment",
+            "target": "payment-service",
+            "replicas": 5
+        }
 
-    Runbook:
-    {runbook}
+    else:
 
-    Generate:
-
-    1. Recommended Action
-    2. Risk Level
-    3. Explanation
-    """
-
-    response = client.chat.completions.create(
-        model="openai/gpt-oss-20b",
-        messages=[
-            {
-                "role": "user",
-                "content": prompt
-            }
-        ]
-    )
-
-    return response.choices[0].message.content
+        return {
+            "action": "manual_review"
+        }

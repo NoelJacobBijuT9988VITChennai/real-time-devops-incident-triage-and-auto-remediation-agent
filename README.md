@@ -76,85 +76,182 @@ Incident Submission
 | ☸️ Kubernetes Auto-Remediation | Performs restart, scaling, and recovery      |
 | 🔄 Workflow Orchestration      | Coordinates end-to-end workflow              |
 
-📡 API Endpoints
-🏠 GET /
-Returns a welcome message.
+## 📡 API Endpoints
 
-❤️ GET /health
-Checks application health.
+### 🏠 GET /
+
+Returns a welcome message indicating that the Agentic SRE Copilot service is running.
+
+---
+
+### ❤️ GET /health
+
+Checks the health status of the application.
+
+#### Sample Response
+
+```json
 {
   "status": "Healthy"
 }
+```
 
-☸️ GET /kubernetes-status
-Checks Kubernetes connectivity.
+---
 
-🚨 POST /analyze-incident
-Analyzes incidents and performs remediation.
-Sample Input
+### ☸️ GET /kubernetes-status
+
+Checks Kubernetes cluster connectivity and availability.
+
+#### Sample Response
+
+```json
+{
+  "status": "Connected"
+}
+```
+
+---
+
+### 🚨 POST /analyze-incident
+
+Analyzes incidents, identifies the root cause, retrieves relevant runbooks, and performs automated remediation.
+
+#### Sample Input
+
+```json
 {
   "message": "Database timeout detected",
   "status_code": 500,
   "duration_ms": 12000
 }
-Sample Output
+```
+
+#### Sample Output
+
+```json
 {
   "severity": "Critical",
   "root_cause": "Database Connectivity Problem",
   "remediation": "Restart Deployment",
   "execution_status": "Success"
 }
+```
 
-⚙️ Installation
-1️⃣ Clone Repository
+---
+
+## ⚙️ Installation
+
+### 1️⃣ Clone the Repository
+
+```bash
 git clone https://github.com/<username>/agentic-sre-copilot.git
 cd agentic-sre-copilot
-2️⃣ Create Virtual Environment
+```
+
+### 2️⃣ Create a Virtual Environment
+
+```bash
 python -m venv venv
-3️⃣ Activate Virtual Environment
-Windows
+```
+
+### 3️⃣ Activate the Virtual Environment
+
+#### Windows
+
+```powershell
 .\venv\Scripts\Activate.ps1
-Linux/macOS
+```
+
+#### Linux/macOS
+
+```bash
 source venv/bin/activate
-4️⃣ Install Dependencies
+```
+
+### 4️⃣ Install Dependencies
+
+```bash
 pip install -r requirements.txt
+```
 
-▶️ Execution Flow
-🧠 Test Embedding Model
+---
+
+## ▶️ Execution Flow
+
+### 🧠 Test Embedding Model
+
+```bash
 python test_embedding.py
-📚 Load Runbooks into ChromaDB
+```
+
+### 📚 Load Runbooks into ChromaDB
+
+```bash
 python rag/load_runbooks.py
-🔎 Test RAG Retrieval
+```
+
+### 🔎 Test RAG Retrieval
+
+```bash
 python test_rag.py
-☸️ Test Kubernetes Connection
+```
+
+### ☸️ Test Kubernetes Connectivity
+
+```bash
 python test_kubernetes.py
-🚀 Run Complete Workflow
+```
+
+### 🚀 Test Complete Workflow
+
+```bash
 python test_workflow.py
-🌐 Start FastAPI Server
+```
+
+### 🌐 Start FastAPI Server
+
+```bash
 uvicorn app.main:app --reload
-📖 Swagger UI
-Access interactive API documentation:
+```
+
+---
+
+## 📖 Swagger UI
+
+Access the interactive API documentation at:
+
+```text
 http://127.0.0.1:8000/docs
+```
 
-🎯 Objectives
-✅ Automate incident management
-✅ Reduce MTTR
-✅ Improve root cause identification
-✅ Enable intelligent runbook retrieval
-✅ Perform Kubernetes-based remediation
-✅ Build self-healing cloud-native systems
+---
 
-📈 Expected Outcomes
-⚡ Faster incident resolution
-🤖 Reduced manual intervention
-🛡️ Improved system reliability
-📚 Intelligent troubleshooting assistance
-☸️ Automated Kubernetes recovery
-🔄 Self-healing infrastructure
+## 🎯 Objectives
 
-🔮 Future Enhancements
-📈 Predictive Incident Detection
-🤖 Advanced Anomaly Detection
-☸️ Multi-Cluster Kubernetes Support
-📊 Prometheus & Grafana Integration
-🔄 Automated Approval Workflows
+- ✅ Automate incident management and analysis
+- ✅ Reduce Mean Time to Resolution (MTTR)
+- ✅ Improve root cause identification accuracy
+- ✅ Enable intelligent runbook retrieval using RAG
+- ✅ Perform Kubernetes-based remediation
+- ✅ Build self-healing cloud-native infrastructure
+
+---
+
+## 📈 Expected Outcomes
+
+- ⚡ Faster incident resolution
+- 🤖 Reduced manual intervention
+- 🛡️ Improved service reliability
+- 📚 Intelligent troubleshooting assistance
+- ☸️ Automated Kubernetes recovery
+- 🔄 Self-healing infrastructure
+
+---
+
+## 🔮 Future Enhancements
+
+- 📈 Predictive Incident Detection
+- 🤖 Advanced Anomaly Detection
+- ☸️ Multi-Cluster Kubernetes Support
+- 📊 Prometheus & Grafana Integration
+- 🔄 Automated Approval Workflows

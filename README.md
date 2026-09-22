@@ -1,18 +1,26 @@
-🚀 Agentic SRE Copilot
-📌 Overview
+# 🚀 Agentic SRE Copilot
+
+## 📌 Overview
 
 Agentic SRE Copilot is an AI-powered incident management and auto-remediation platform designed for cloud-native environments. The system automates incident detection, triage, root cause analysis, runbook retrieval, remediation planning, and Kubernetes-based recovery using Multi-Agent AI, RAG, MiniLM, ChromaDB, Groq LLMs, and Kubernetes.
 
-🎯 Key Benefits
-⚡ Reduced Mean Time to Resolution (MTTR)
-🤖 Automated Incident Analysis
-🔍 Intelligent Root Cause Analysis (RCA)
-📚 RAG-Based Runbook Retrieval
-☸️ Kubernetes Auto-Remediation
-🛡️ Improved Service Reliability
-🔄 Self-Healing Infrastructure
+---
 
-🏗️ Architecture
+## 🎯 Key Benefits
+
+- ⚡ Reduced Mean Time to Resolution (MTTR)
+- 🤖 Automated Incident Analysis
+- 🔍 Intelligent Root Cause Analysis (RCA)
+- 📚 RAG-Based Runbook Retrieval
+- ☸️ Kubernetes Auto-Remediation
+- 🛡️ Improved Service Reliability
+- 🔄 Self-Healing Infrastructure
+
+---
+
+## 🏗️ Architecture
+
+```text
 Incident Submission
         ↓
 📥 Incident Ingestion
@@ -38,6 +46,7 @@ Incident Submission
 ☸️ Kubernetes Auto-Remediation
         ↓
 ✅ Incident Resolution
+``
 
 🛠️ Technology Stack
 | Category                   | Technology               |

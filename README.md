@@ -46,35 +46,43 @@ Incident Submission
 ☸️ Kubernetes Auto-Remediation
         ↓
 ✅ Incident Resolution
-``
+```
 
-🛠️ Technology Stack
-| Category                   | Technology               |
-| -------------------------- | ------------------------ |
-| 💻 Language                | Python                   |
-| 🌐 Backend                 | FastAPI                  |
-| 📖 API Documentation       | Swagger UI               |
-| 🤖 LLM                     | Groq                     |
-| 🧠 Embeddings              | MiniLM                   |
-| 🔎 Retrieval               | RAG                      |
-| 🗄️ Vector Database        | ChromaDB                 |
-| ☸️ Container Orchestration | Kubernetes               |
-| 🔗 Workflow                | Multi-Agent Architecture |
-| 📂 Version Control         | Git & GitHub             |
+---
 
-📦 Project Modules
-| Module                         | Function                                     |
-| ------------------------------ | -------------------------------------------- |
-| 📥 Incident Ingestion          | Collects incident data, logs, and metrics    |
-| 🚦 Incident Triage             | Prioritizes incidents based on severity      |
-| 📄 Log Analysis                | Detects errors and anomalies from logs       |
-| 📊 Metrics Analysis            | Analyzes latency and performance metrics     |
-| 🔍 Root Cause Analysis         | Identifies the underlying cause of incidents |
-| 📚 RAG Runbook Retrieval       | Retrieves relevant troubleshooting guides    |
-| 📝 Remediation Planning        | Generates recovery recommendations           |
-| 🤖 LLM Intelligence            | Provides reasoning and decision support      |
-| ☸️ Kubernetes Auto-Remediation | Performs restart, scaling, and recovery      |
-| 🔄 Workflow Orchestration      | Coordinates end-to-end workflow              |
+## 🛠️ Technology Stack
+
+| Category | Technology |
+|-----------|------------|
+| 💻 Language | Python |
+| 🌐 Backend | FastAPI |
+| 📖 API Documentation | Swagger UI |
+| 🤖 LLM | Groq |
+| 🧠 Embeddings | MiniLM |
+| 🔎 Retrieval | RAG |
+| 🗄️ Vector Database | ChromaDB |
+| ☸️ Container Orchestration | Kubernetes |
+| 🔗 Workflow | Multi-Agent Architecture |
+| 📂 Version Control | Git & GitHub |
+
+---
+
+## 📦 Project Modules
+
+| Module | Function |
+|----------|----------|
+| 📥 Incident Ingestion | Collects incident data, logs, and metrics |
+| 🚦 Incident Triage | Prioritizes incidents based on severity |
+| 📄 Log Analysis | Detects errors and anomalies from logs |
+| 📊 Metrics Analysis | Analyzes latency and performance metrics |
+| 🔍 Root Cause Analysis | Identifies the underlying cause of incidents |
+| 📚 RAG Runbook Retrieval | Retrieves relevant troubleshooting guides |
+| 📝 Remediation Planning | Generates recovery recommendations |
+| 🤖 LLM Intelligence | Provides reasoning and decision support |
+| ☸️ Kubernetes Auto-Remediation | Performs restart, scaling, and recovery |
+| 🔄 Workflow Orchestration | Coordinates end-to-end workflow |
+
+---
 
 ## 📡 API Endpoints
 
@@ -100,7 +108,7 @@ Checks the health status of the application.
 
 ### ☸️ GET /kubernetes-status
 
-Checks Kubernetes cluster connectivity and availability.
+Checks Kubernetes cluster connectivity.
 
 #### Sample Response
 
@@ -114,7 +122,7 @@ Checks Kubernetes cluster connectivity and availability.
 
 ### 🚨 POST /analyze-incident
 
-Analyzes incidents, identifies the root cause, retrieves relevant runbooks, and performs automated remediation.
+Analyzes incidents and performs automated remediation.
 
 #### Sample Input
 
@@ -136,9 +144,6 @@ Analyzes incidents, identifies the root cause, retrieves relevant runbooks, and 
   "execution_status": "Success"
 }
 ```
-
----
-
 ## ⚙️ Installation
 
 ### 1️⃣ Clone the Repository

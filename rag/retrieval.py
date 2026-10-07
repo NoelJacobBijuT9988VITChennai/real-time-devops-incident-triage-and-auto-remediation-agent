@@ -1,35 +1,46 @@
 from langchain_community.vectorstores import Chroma
+from langchain_community.embeddings import HuggingFaceEmbeddings
 
-from langchain_community.embeddings import (
-    HuggingFaceEmbeddings
-)
+from config import VECTOR_DB_PATH
 
-MODEL_PATH = "models/all-MiniLM-L6-v2"
-
-VECTOR_DB_PATH = "vector_db"
-
+# Load embedding model
 embedding_model = HuggingFaceEmbeddings(
-    model_name=MODEL_PATH,
-    model_kwargs={
-        "local_files_only": True
-    }
+    model_name="./models/all-MiniLM-L6-v2"
 )
 
+# Load Chroma DB
 db = Chroma(
     persist_directory=VECTOR_DB_PATH,
     embedding_function=embedding_model
 )
 
+print(
+    "Documents in Vector DB:",
+    db._collection.count()
+)
 
-def retrieve_runbook(query):
 
-    docs = db.similarity_search(
+def retrieve_runbook(query: str):
+
+    # Handle empty queries
+    if not query:
+        query = "Unknown Incident"
+
+    query = str(query).strip()
+
+    if len(query) == 0:
+        query = "Unknown Incident"
+
+    print("Query:", query)
+
+    results = db.similarity_search(
         query,
-        k=1
+        k=3
     )
 
-    if docs:
+    print("Results:", results)
 
-        return docs[0].page_content
+    if not results:
+        return "No runbook found."
 
-    return "No runbook found."
+    return results[0].page_content

@@ -1,22 +1,40 @@
-# Activate virtual environment
+# Activate Virtual Environment
 .\venv\Scripts\Activate.ps1
 
-# Verify embedding model
+# Verify Embedding Model
 python test_embedding.py
 
-# Load runbooks into ChromaDB
+# Load Runbooks into ChromaDB
 python rag/load_runbooks.py
 
-# Test RAG retrieval (recommended)
+# Test RAG Retrieval
 python test_rag.py
 
-# Verify Kubernetes connectivity (recommended)
+# Verify Kubernetes Connectivity
 python test_kubernetes.py
 
-# Test complete workflow
+# Test Groq LLM Integration
+python test_groq.py
+
+# Test Complete Workflow
 python test_workflow.py
 
-# Start FastAPI application
+# Start FastAPI Application
 uvicorn app.main:app --reload
 
-http://127.0.0.1:8000/docs
+# Open Swagger UI
+# http://127.0.0.1:8000/docs
+
+# Sample API Input
+# {
+#   "message": "Database timeout detected",
+#   "status_code": 500,
+#   "duration_ms": 12000
+# }
+
+# Open a New Terminal and Run Frontend
+.\venv\Scripts\Activate.ps1
+streamlit run frontend/app.py
+
+# Frontend URL
+# http://localhost:8501

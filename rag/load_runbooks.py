@@ -1,29 +1,26 @@
 import os
 
-from langchain.schema import Document
-
+from langchain_core.documents import Document
 from langchain_community.vectorstores import Chroma
-from langchain_community.embeddings import (
-    HuggingFaceEmbeddings
-)
+from langchain_community.embeddings import HuggingFaceEmbeddings
 
-MODEL_PATH = "models/all-MiniLM-L6-v2"
+from config import VECTOR_DB_PATH
 
-VECTOR_DB_PATH = "vector_db"
-
-RUNBOOK_FOLDER = "datasets/runbooks"
+RUNBOOKS_DIR = "datasets/runbooks"
 
 documents = []
 
-for file in os.listdir(RUNBOOK_FOLDER):
+for filename in os.listdir(RUNBOOKS_DIR):
 
-    if file.endswith(".md"):
+    if filename.endswith(".md"):
+
+        filepath = os.path.join(
+            RUNBOOKS_DIR,
+            filename
+        )
 
         with open(
-            os.path.join(
-                RUNBOOK_FOLDER,
-                file
-            ),
+            filepath,
             "r",
             encoding="utf-8"
         ) as f:
@@ -34,16 +31,17 @@ for file in os.listdir(RUNBOOK_FOLDER):
             Document(
                 page_content=content,
                 metadata={
-                    "source": file
+                    "source": filename
                 }
             )
         )
 
+print(
+    f"Runbooks Loaded: {len(documents)}"
+)
+
 embedding_model = HuggingFaceEmbeddings(
-    model_name=MODEL_PATH,
-    model_kwargs={
-        "local_files_only": True
-    }
+    model_name="./models/all-MiniLM-L6-v2"
 )
 
 db = Chroma.from_documents(
@@ -52,8 +50,4 @@ db = Chroma.from_documents(
     persist_directory=VECTOR_DB_PATH
 )
 
-db.persist()
-
-print(
-    "Runbooks loaded successfully."
-)
+print("Vector Database Created Successfully")
